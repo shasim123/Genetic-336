@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="BIO 336: Genetics Course Calendar" />
+  <meta name="keywords" content="Biology, Genetics, Course, Calendar" />
+  <meta name="author" content="Your Name" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIO 336: Genetics</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Google Fonts (optional) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /*
+    =======================================
+    GLOBAL STYLES
+    =======================================
+    */
+    * {
+      box-sizing: border-box;
+    }
+    html {
+      /* Smooth scrolling */
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    a {
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+
+    /*
+    =======================================
+    NAVBAR STYLES
+    =======================================
+    */
+    .navbar {
+      background: #0d6efd; /* primary blue */
+      transition: background 0.3s ease-in-out;
+    }
+    .navbar:hover {
+      background: #0a58ca; /* slightly darker on hover */
+    }
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #fff !important;
+    }
+    .nav-link {
+      color: #fff !important;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: #dceeff !important;
+    }
+
+    /*
+    =======================================
+    HERO SECTION (PARALLAX EFFECT)
+    =======================================
+    */
+    .hero {
+      position: relative;
+      height: 60vh;
+      min-height: 400px;
+      width: 100%;
+      /* Parallax background - replace URL to any image you like */
+      background: url('https://images.unsplash.com/photo-1607458771962-4eee3fa10ea4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')
+        no-repeat center center;
+      background-attachment: fixed; /* This enables parallax effect on desktop */
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .hero::before {
+      /* Dark overlay to make text more readable */
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 110, 253, 0.3); /* bluish overlay */
+      top: 0;
+      left: 0;
+    }
+    .hero h1,
+    .hero p {
+      position: relative;
+      z-index: 2;
+      margin: 0 1rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease forwards;
+      opacity: 0;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+    }
+
+    /*
+    =======================================
+    ANIMATIONS
+    =======================================
+    */
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /*
+    =======================================
+    MONTH HEADINGS
+    =======================================
+    */
+    .month-heading {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #0d6efd;
+      text-decoration: underline;
+    }
+
+    /*
+    =======================================
+    ACCORDION + WEEKS
+    =======================================
+    */
+    .week-card {
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    .week-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    }
+    .accordion-button {
+      background-color: #e9f0ff; /* slight blue tint */
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .accordion-button:focus {
+      box-shadow: none !important;
+    }
+    .accordion-button:not(.collapsed) {
+      background-color: #0d6efd !important;
+      color: #fff;
+    }
+    .accordion-button:hover {
+      background-color: #dceeff;
+    }
+    .table th,
+    .table td {
+      vertical-align: middle;
+    }
+
+    /*
+    =======================================
+    FOOTER (OPTIONAL)
+    =======================================
+    */
+    .footer {
+      background: #0d6efd;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /*
+    =======================================
+    RESPONSIVE MEDIA QUERIES
+    =======================================
+    */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .month-heading {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">BIO 336: Genetics</a>
+      <button
+        class="navbar-toggler text-white border-0"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span
+          class="navbar-toggler-icon"
+          style="filter: invert(1) brightness(2);"
+        ></span>
+      </button>
+      <div
+        class="collapse navbar-collapse"
+        id="navbarSupportedContent"
+      >
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <!-- Active Page -->
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home</a>
+          </li>
+          <!-- Add more nav links if needed -->
+          <!--
+          <li class="nav-item">
+            <a class="nav-link" href="#">Syllabus</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Resources</a>
+          </li>
+          -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <!-- Hero / Parallax Section -->
+  <div class="hero">
+    <h1>Welcome to BIO 336: Genetics</h1>
+    <p>Below is your course calendar, objectives, and assignments</p>
+  </div>
+  <!-- End Hero Section -->
+
+  <!-- MAIN CONTAINER -->
+  <div class="container mb-5">
+    <!-- JANUARY (Weeks 1, 2, 3) -->
+    <h2 class="month-heading">January</h2>
+    <div class="accordion" id="accordionJanuary">
+      <!-- Week 1 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week1header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week1Body"
+            aria-expanded="false"
+            aria-controls="week1Body"
+          >
+            Week 1 (Jan 13-17) – Chapter 1
+          </button>
+        </h2>
+        <div
+          id="week1Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week1header"
+          data-bs-parent="#accordionJanuary"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    1.1 DNA as the Genetic Material<br/>
+                    1.2 DNA Structure and Replication
+                  </td>
+                  <td>
+                    <strong>Objective 1</strong><br/>
+                    SLO: Understand the principle of the central dogma.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 2 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week2header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week2Body"
+            aria-expanded="false"
+            aria-controls="week2Body"
+          >
+            Week 2 (Jan 20-24) – Chapter 1
+          </button>
+        </h2>
+        <div
+          id="week2Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week2header"
+          data-bs-parent="#accordionJanuary"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    1.3 Genes and Proteins<br/>
+                    1.4 Genetic Analysis<br/>
+                    1.5 Gene Expression: The Central Dogma
+                  </td>
+                  <td>
+                    <strong>Objective 1</strong><br/>
+                    SLO: Understand the principle of the central dogma
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Objective 1 Test one</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 3 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week3header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week3Body"
+            aria-expanded="false"
+            aria-controls="week3Body"
+          >
+            Week 3 (Jan 27-31) – Chapter 2
+          </button>
+        </h2>
+        <div
+          id="week3Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week3header"
+          data-bs-parent="#accordionJanuary"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    2.1 Prokaryotic & Eukaryotic cells differ in genetic characteristics<br/>
+                    2.2 Cell requires copying genetic material, separation & division
+                  </td>
+                  <td></td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Presentation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> <!-- End Accordion for January -->
+
+    <!-- FEBRUARY (Weeks 4, 5, 6, 7) -->
+    <h2 class="month-heading">February</h2>
+    <div class="accordion" id="accordionFebruary">
+      <!-- Week 4 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week4header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week4Body"
+            aria-expanded="false"
+            aria-controls="week4Body"
+          >
+            Week 4 (Feb 3-7) – Chapter 3
+          </button>
+        </h2>
+        <div
+          id="week4Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week4header"
+          data-bs-parent="#accordionFebruary"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    3.1 Morphological & Molecular Phenotypes<br/>
+                    3.2 Segregation of a Single Gene<br/>
+                    3.3 Segregation of Two or More Genes
+                  </td>
+                  <td>
+                    <strong>Objective 2</strong><br/>
+                    SLO: Know the various types of genetic inheritance and the principles of hereditary.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 5 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week5header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week5Body"
+            aria-expanded="false"
+            aria-controls="week5Body"
+          >
+            Week 5 (Feb 10-14) – Chapter 3
+          </button>
+        </h2>
+        <div
+          id="week5Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week5header"
+          data-bs-parent="#accordionFebruary"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    3.4 Human Pedigree Analysis<br/>
+                    3.5 Incomplete Dominance & Epistasis<br/>
+                    3.6 Probability in Genetic Analysis
+                  </td>
+                  <td>
+                    <strong>Objective 2</strong><br/>
+                    SLO: Identify various types of gene inheritance
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Objective 2 Test two</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 6 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week6header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week6Body"
+            aria-expanded="false"
+            aria-controls="week6Body"
+          >
+            Week 6 (Feb 17-21) – Chapter 4
+          </button>
+        </h2>
+        <div
+          id="week6Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week6header"
+          data-bs-parent="#accordionFebruary"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    4.2 Mitosis<br/>
+                    4.3 Meiosis<br/>
+                    4.4 Sex-Chromosome Inheritance<br/>
+                    4.5 Probability of Progeny<br/>
+                    4.6 Testing Goodness of Fit
+                  </td>
+                  <td>
+                    <strong>Objective 3</strong>
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Presentation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 7 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week7header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week7Body"
+            aria-expanded="false"
+            aria-controls="week7Body"
+          >
+            Week 7 (Feb 24-28) – Chapter 5
+          </button>
+        </h2>
+        <div
+          id="week7Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week7header"
+          data-bs-parent="#accordionFebruary"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    5.1 Linkage & Recombination<br/>
+                    5.2 Genetic Mapping
+                  </td>
+                  <td>
+                    <strong>Objective 3</strong><br/>
+                    SLO: Solve problems in linkage, recombination, genetic mapping.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> <!-- End Accordion for February -->
+
+    <!-- MARCH (Weeks 8, 9, 10, 11) -->
+    <h2 class="month-heading">March</h2>
+    <div class="accordion" id="accordionMarch">
+      <!-- Week 8 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week8header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week8Body"
+            aria-expanded="false"
+            aria-controls="week8Body"
+          >
+            Week 8 (Mar 3-7) – Chapter 6
+          </button>
+        </h2>
+        <div
+          id="week8Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week8header"
+          data-bs-parent="#accordionMarch"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    6.1 The Human Karyotype<br/>
+                    6.2 Chromosome Abnormalities<br/>
+                    6.3 Chromosomal Deletions & Duplications
+                  </td>
+                  <td>
+                    <strong>Objective 4</strong><br/>
+                    SLO: Understand the various types of ploidy & chromosomal abnormalities.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Objective 3 Test three</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 9 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week9header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week9Body"
+            aria-expanded="false"
+            aria-controls="week9Body"
+          >
+            Week 9 (Mar 10-14) – Chapter 6
+          </button>
+        </h2>
+        <div
+          id="week9Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week9header"
+          data-bs-parent="#accordionMarch"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    6.4 Genetics of Chromosomal Inversions<br/>
+                    6.5 Chromosomal Translocations<br/>
+                    6.7 Polyploidy in Plant Evolution
+                  </td>
+                  <td>
+                    <strong>Objective 4</strong><br/>
+                    SLO: Understand & identify various types of ploidy and chromosomal abnormalities.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Presentation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 10 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week10header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week10Body"
+            aria-expanded="false"
+            aria-controls="week10Body"
+          >
+            Week 10 (Mar 17-21) – Spring Break
+          </button>
+        </h2>
+        <div
+          id="week10Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week10header"
+          data-bs-parent="#accordionMarch"
+        >
+          <div class="accordion-body">
+            <p><strong>No classes. Enjoy your Spring Break!</strong></p>
+          </div>
+        </div>
+      </div>
+      <!-- Week 11 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week11header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week11Body"
+            aria-expanded="false"
+            aria-controls="week11Body"
+          >
+            Week 11 (Mar 24-28) – Chapter 12
+          </button>
+        </h2>
+        <div
+          id="week11Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week11header"
+          data-bs-parent="#accordionMarch"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    12.3 Transcription Overview (Prokaryotes/Eukaryotes)<br/>
+                    12.4 Transcription in Prokaryotes<br/>
+                    12.5 Transcription in Eukaryotes<br/>
+                    12.6 mRNA & RNA Processing<br/>
+                    12.7 Protein Synthesis<br/>
+                    12.9 Standard Genetic Code
+                  </td>
+                  <td>
+                    <strong>Objective 4</strong>
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Test four</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Accordion for March -->
+
+    <!-- APRIL (Weeks 12, 13, 14, 15) -->
+    <h2 class="month-heading">April</h2>
+    <div class="accordion" id="accordionApril">
+      <!-- Week 12 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week12header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week12Body"
+            aria-expanded="false"
+            aria-controls="week12Body"
+          >
+            Week 12 (Mar 31 - Apr 2-4) – Chapter 13
+          </button>
+        </h2>
+        <div
+          id="week12Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week12header"
+          data-bs-parent="#accordionApril"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    13.1 Transcriptional Regulation in Prokaryotes<br/>
+                    13.2 Operon System of Gene Regulation<br/>
+                    13.5 Transcriptional Regulation in Eukaryotes
+                  </td>
+                  <td>
+                    SLO: Understand & know gene expression (transcription & translation) in prokaryotes/eukaryotes.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 13 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week13header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week13Body"
+            aria-expanded="false"
+            aria-controls="week13Body"
+          >
+            Week 13 (Apr 7-11) – Chapter 13
+          </button>
+        </h2>
+        <div
+          id="week13Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week13header"
+          data-bs-parent="#accordionApril"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    13.6 Epigenetic Mechanisms<br/>
+                    13.7 RNA Processing & Decay<br/>
+                    13.8 Noncoding RNAs & Regulation<br/>
+                    13.9 Translational Control
+                  </td>
+                  <td>
+                    SLO: Understand & know gene expression both in prokaryotes and eukaryotes.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 14 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week14header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week14Body"
+            aria-expanded="false"
+            aria-controls="week14Body"
+          >
+            Week 14 (Apr 14-18) – Chapter 11
+          </button>
+        </h2>
+        <div
+          id="week14Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week14header"
+          data-bs-parent="#accordionApril"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    11.1 Types of Mutations<br/>
+                    11.2 Molecular Basis of Mutation<br/>
+                    11.3 Transposable Elements<br/>
+                    11.4 Spontaneous Mutation<br/>
+                    11.5 Mutagens<br/>
+                    11.6 DNA Repair<br/>
+                    11.7 Reverse & Suppressor Mutations<br/>
+                    11.8 Relationship Between Repair/Recombination
+                  </td>
+                  <td>
+                    <strong>Objective 6</strong><br/>
+                    SLO: Understand & identify various types of mutations.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Objective five test five</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Week 15 -->
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week15header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week15Body"
+            aria-expanded="false"
+            aria-controls="week15Body"
+          >
+            Week 15 (Apr 21-25) – Chapter 11
+          </button>
+        </h2>
+        <div
+          id="week15Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week15header"
+          data-bs-parent="#accordionApril"
+        >
+          <div class="accordion-body">
+            <table class="table table-striped table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Topic</th>
+                  <th>Course Objectives/SLO</th>
+                  <th>Learning Materials</th>
+                  <th>Activities</th>
+                  <th>Assessments</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    11.1 Types of Mutations (Review)<br/>
+                    11.2 Molecular Basis of Mutation<br/>
+                    11.3 Transposable Elements<br/>
+                    11.4 Spontaneous Mutation<br/>
+                    11.5 Mutagens<br/>
+                    11.6 DNA Repair<br/>
+                    11.7 Reverse & Suppressor Mutations<br/>
+                    11.8 Relationship Between Repair/Recombination
+                  </td>
+                  <td>
+                    <strong>Objective 6</strong><br/>
+                    SLO: Understand & identify various types of mutations.
+                  </td>
+                  <td>Textbook and PowerPoint</td>
+                  <td>In-class Lecture, Quiz or Assignments</td>
+                  <td>Presentation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Accordion for April -->
+
+    <!-- MAY (Week 16) -->
+    <h2 class="month-heading">May</h2>
+    <div class="accordion" id="accordionMay">
+      <div class="accordion-item week-card">
+        <h2 class="accordion-header" id="week16header">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#week16Body"
+            aria-expanded="false"
+            aria-controls="week16Body"
+          >
+            Week 16 (Apr 28 - May 2, 2025) – Final Exam
+          </button>
+        </h2>
+        <div
+          id="week16Body"
+          class="accordion-collapse collapse"
+          aria-labelledby="week16header"
+          data-bs-parent="#accordionMay"
+        >
+          <div class="accordion-body">
+            <p>
+              <strong>Accumulative Final exam based on university assigned date and time.</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Accordion for May -->
+  </div>
+  <!-- End Main Container -->
+
+  <!-- Optional Footer -->
+  <div class="footer">
+    <p class="mb-0">© 2025 Genetics Department - All Rights Reserved</p>
+  </div>
+
+  <!-- Bootstrap 5 JS (Popper + Bootstrap) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+</body>
+</html>
