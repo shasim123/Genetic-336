@@ -1,90 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Genetics 336 – Spring 2026 Schedule</title>
-<style>
-  body { font-family: Arial, sans-serif; margin: 20px; }
-  table { border-collapse: collapse; width: 100%; }
-  th, td { border: 1px solid #444; padding: 8px; text-align: left; }
-  th { background: #f2f2f2; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Genetics 336 – Spring 2026 Schedule</title>
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --header:#0f172a;
+      --headerText:#ffffff;
+
+      --row:#ffffff;
+      --rowAlt:#f9fafb;
+
+      --examBg:#fff7ed;
+      --examBorder:#fb923c;
+
+      --noclassBg:#f3f4f6;
+      --noclassBorder:#9ca3af;
+
+      --breakBg:#eff6ff;
+      --breakBorder:#60a5fa;
+
+      --asyncBg:#f5f3ff;
+      --asyncBorder:#8b5cf6;
+
+      --presBg:#ecfdf5;
+      --presBorder:#34d399;
+    }
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height:1.35;
+    }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 28px auto;
+      padding: 0 16px 40px;
+    }
+
+    h1{
+      margin:0 0 6px 0;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .sub{
+      margin:0 0 18px 0;
+      color:var(--muted);
+      font-size: 14px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius: 12px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+
+    .meta{
+      padding: 14px 16px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 18px;
+      font-size: 14px;
+    }
+    .meta b{ font-weight:700; }
+
+    .legend{
+      padding: 10px 16px 14px 16px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      font-size: 13px;
+      color:var(--muted);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      display:inline-block;
+    }
+    .dot.exam{ background: var(--examBorder); }
+    .dot.noclass{ background: var(--noclassBorder); }
+    .dot.break{ background: var(--breakBorder); }
+    .dot.async{ background: var(--asyncBorder); }
+    .dot.pres{ background: var(--presBorder); }
+
+    table{
+      width:100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead th{
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--header);
+      color: var(--headerText);
+      text-align:left;
+      padding: 12px 12px;
+      font-size: 14px;
+      letter-spacing:.2px;
+    }
+
+    tbody td{
+      border-top:1px solid var(--border);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(odd){ background: var(--row); }
+    tbody tr:nth-child(even){ background: var(--rowAlt); }
+
+    /* Row types */
+    tr.exam{
+      background: var(--examBg) !important;
+      border-left: 6px solid var(--examBorder);
+    }
+    tr.noclass{
+      background: var(--noclassBg) !important;
+      border-left: 6px solid var(--noclassBorder);
+    }
+    tr.break{
+      background: var(--breakBg) !important;
+      border-left: 6px solid var(--breakBorder);
+    }
+    tr.async{
+      background: var(--asyncBg) !important;
+      border-left: 6px solid var(--asyncBorder);
+    }
+    tr.pres{
+      background: var(--presBg) !important;
+      border-left: 6px solid var(--presBorder);
+    }
+
+    .muted{ color: var(--muted); }
+
+    @media (max-width: 760px){
+      thead{ display:none; }
+      table, tbody, tr, td{ display:block; width:100%; }
+      tbody td{
+        border-top:none;
+        border-bottom:1px solid var(--border);
+      }
+      tbody td::before{
+        content: attr(data-label);
+        display:block;
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="wrap">
+    <h1>Genetics 336 – Spring 2026 Schedule</h1>
+    <p class="sub">
+      Mondays & Wednesdays • Start Jan 12 • Text: <i>Genetics: A Conceptual Approach (Update, 7th Ed.)</i>
+    </p>
 
-<h2>Genetics 336 – Spring 2026 Schedule</h2>
+    <div class="card">
+      <div class="meta">
+        <div><b>Exam 1:</b> Ch. 1–3</div>
+        <div><b>Exam 2:</b> Ch. 4–5</div>
+        <div><b>Exam 3:</b> Ch. 6 & 11</div>
+        <div><b>Final Exam:</b> Ch. 12, 13, 15 (not comprehensive)</div>
+      </div>
 
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Topic / Chapter</th>
-    <th>Assignment / Assessment</th>
-  </tr>
+      <div class="legend">
+        <span class="pill"><span class="dot exam"></span>Exam</span>
+        <span class="pill"><span class="dot noclass"></span>No class / holiday</span>
+        <span class="pill"><span class="dot break"></span>Spring break</span>
+        <span class="pill"><span class="dot async"></span>Asynchronous (conference)</span>
+        <span class="pill"><span class="dot pres"></span>Student presentations</span>
+      </div>
 
-  <!-- Week 1 -->
-  <tr><td>Jan 12 (Mon)</td><td>Course Intro • Ch. 1</td><td>Start Ch. 1; Achieve Concept Check</td></tr>
-  <tr><td>Jan 14 (Wed)</td><td>Ch. 1 & Ch. 2 Overview</td><td>Discussion</td></tr>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">Date</th>
+            <th style="width: 42%;">Topic / Chapter</th>
+            <th style="width: 40%;">Assignment / Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Date">Jan 12 (Mon)</td>
+            <td data-label="Topic / Chapter">Course Intro • Ch. 1</td>
+            <td data-label="Assignment / Assessment">Achieve / concept check</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Jan 14 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 1 & Ch. 2 Overview</td>
+            <td data-label="Assignment / Assessment">In-class discussion / guided practice</td>
+          </tr>
 
-  <!-- Week 2 -->
-  <tr><td>Jan 19 (Mon)</td><td>No Class – MLK Day</td><td></td></tr>
-  <tr><td>Jan 21 (Wed)</td><td>Ch. 2 – Chromosomes & Mitosis</td><td>Quiz on mitosis</td></tr>
+          <tr class="noclass">
+            <td data-label="Date">Jan 19 (Mon)</td>
+            <td data-label="Topic / Chapter"><b>No Class</b> – Martin Luther King Jr. Day</td>
+            <td data-label="Assignment / Assessment" class="muted">—</td>
+          </tr>
 
-  <!-- Week 3 -->
-  <tr><td>Jan 26 (Mon)</td><td>Ch. 2 – Meiosis</td><td>Quiz on meiosis</td></tr>
-  <tr><td>Jan 28 (Wed)</td><td>Ch. 3 – Heredity I</td><td>Punnett squares</td></tr>
+          <tr>
+            <td data-label="Date">Jan 21 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 2 – Chromosomes & Mitosis</td>
+            <td data-label="Assignment / Assessment">Mitosis/meiosis check (as assigned)</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Jan 26 (Mon)</td>
+            <td data-label="Topic / Chapter">Ch. 2 – Meiosis</td>
+            <td data-label="Assignment / Assessment">Mitosis/meiosis check (as assigned)</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Jan 28 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 3 – Heredity I</td>
+            <td data-label="Assignment / Assessment">Punnett square practice</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Feb 2 (Mon)</td>
+            <td data-label="Topic / Chapter">Ch. 3 – Heredity II</td>
+            <td data-label="Assignment / Assessment">Punnett square & probability assignment</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Feb 4 (Wed)</td>
+            <td data-label="Topic / Chapter">Review Ch. 1–3</td>
+            <td data-label="Assignment / Assessment" class="muted">—</td>
+          </tr>
 
-  <!-- Week 4 -->
-  <tr><td>Feb 2 (Mon)</td><td>Ch. 3 – Heredity II</td><td>Punnett square & probability assignment</td></tr>
-  <tr><td>Feb 4 (Wed)</td><td>Review Ch. 1–3</td><td></td></tr>
+          <tr class="exam">
+            <td data-label="Date">Feb 9 (Mon)</td>
+            <td data-label="Topic / Chapter"><b>Exam 1</b> – Ch. 1–3</td>
+            <td data-label="Assignment / Assessment">Unit Exam</td>
+          </tr>
 
-  <!-- Week 5 -->
-  <tr><td>Feb 9 (Mon)</td><td>Exam 1 – Ch. 1–3</td><td></td></tr>
-  <tr><td>Feb 11 (Wed)</td><td>Ch. 4 – Sex Determination</td><td>Chromosomal inheritance assignment</td></tr>
+          <tr>
+            <td data-label="Date">Feb 11 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 4 – Sex Determination</td>
+            <td data-label="Assignment / Assessment">Chromosomal inheritance problem set</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Feb 16 (Mon)</td>
+            <td data-label="Topic / Chapter">Ch. 4 – Sex-Linked Inheritance</td>
+            <td data-label="Assignment / Assessment">Achieve / practice assignment</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Feb 18 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 5 – Extensions (Non-Mendelian)</td>
+            <td data-label="Assignment / Assessment" class="muted">—</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Feb 23 (Mon)</td>
+            <td data-label="Topic / Chapter">Ch. 5 continued</td>
+            <td data-label="Assignment / Assessment">Problem-solving practice</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Feb 25 (Wed)</td>
+            <td data-label="Topic / Chapter">Review Ch. 4–5</td>
+            <td data-label="Assignment / Assessment" class="muted">—</td>
+          </tr>
 
-  <!-- Week 6 -->
-  <tr><td>Feb 16 (Mon)</td><td>Ch. 4 & Sex-Linked</td><td>Achieve assignment</td></tr>
-  <tr><td>Feb 18 (Wed)</td><td>Ch. 5 – Extensions (non-Mendelian)</td><td></td></tr>
+          <tr class="exam">
+            <td data-label="Date">Mar 2 (Mon)</td>
+            <td data-label="Topic / Chapter"><b>Exam 2</b> – Ch. 4–5</td>
+            <td data-label="Assignment / Assessment">Unit Exam</td>
+          </tr>
 
-  <!-- Week 7 -->
-  <tr><td>Feb 23 (Mon)</td><td>Ch. 5 continued</td><td>Practice / problem solving</td></tr>
-  <tr><td>Feb 25 (Wed)</td><td>Review Ch. 4 & 5</td><td></td></tr>
+          <tr>
+            <td data-label="Date">Mar 4 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 6 – Pedigree Analysis</td>
+            <td data-label="Assignment / Assessment">Pedigree chart analysis assignment</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Mar 9 (Mon)</td>
+            <td data-label="Topic / Chapter">Ch. 6 continued</td>
+            <td data-label="Assignment / Assessment">Probability analysis practice</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Mar 11 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 11 – Chromosome Structure / Genome Organization</td>
+            <td data-label="Assignment / Assessment">Ploidy identification assignment</td>
+          </tr>
 
-  <!-- Week 8 -->
-  <tr><td>Mar 2 (Mon)</td><td>Exam 2 – Ch. 4 & 5</td><td></td></tr>
-  <tr><td>Mar 4 (Wed)</td><td>Ch. 6 – Pedigree Analysis</td><td>Pedigree chart assignment</td></tr>
+          <tr class="break">
+            <td data-label="Date">Mar 16 (Mon)</td>
+            <td data-label="Topic / Chapter"><b>Spring Break</b> – No Class</td>
+            <td data-label="Assignment / Assessment" class="muted">—</td>
+          </tr>
+          <tr class="break">
+            <td data-label="Date">Mar 18 (Wed)</td>
+            <td data-label="Topic / Chapter"><b>Spring Break</b> – No Class</td>
+            <td data-label="Assignment / Assessment" class="muted">—</td>
+          </tr>
 
-  <!-- Week 9 -->
-  <tr><td>Mar 9 (Mon)</td><td>Ch. 6 continued</td><td></td></tr>
-  <tr><td>Mar 11 (Wed)</td><td>Ch. 11 – Chromosome Structure</td><td>Ploidy identification assignment</td></tr>
+          <tr>
+            <td data-label="Date">Mar 23 (Mon)</td>
+            <td data-label="Topic / Chapter">Ch. 11 continued</td>
+            <td data-label="Assignment / Assessment">Review / practice</td>
+          </tr>
+          <tr class="async">
+            <td data-label="Date">Mar 25 (Wed)</td>
+            <td data-label="Topic / Chapter"><b>Asynchronous</b> – Conference Travel</td>
+            <td data-label="Assignment / Assessment">Posted activity (as assigned)</td>
+          </tr>
 
-  <!-- Week 10 -->
-  <tr><td>Mar 16 (Mon)</td><td>Spring Break – No Class</td><td></td></tr>
-  <tr><td>Mar 18 (Wed)</td><td>Spring Break – No Class</td><td></td></tr>
+          <tr class="exam">
+            <td data-label="Date">Mar 30 (Mon)</td>
+            <td data-label="Topic / Chapter"><b>Exam 3</b> – Ch. 6 & 11</td>
+            <td data-label="Assignment / Assessment">Unit Exam</td>
+          </tr>
 
-  <!-- Week 11 -->
-  <tr><td>Mar 23 (Mon)</td><td>Ch. 11 continued</td><td>Review</td></tr>
-  <tr><td>Mar 25 (Wed)</td><td>Asynchronous (Conference Travel)</td><td>AI policy reminder</td></tr>
+          <tr>
+            <td data-label="Date">Apr 1 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 12 – DNA Replication (and recombination concepts)</td>
+            <td data-label="Assignment / Assessment">Achieve / replication assignment</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Apr 6 (Mon)</td>
+            <td data-label="Topic / Chapter">Ch. 13 – Transcription</td>
+            <td data-label="Assignment / Assessment">Central dogma activity (as assigned)</td>
+          </tr>
+          <tr>
+            <td data-label="Date">Apr 8 (Wed)</td>
+            <td data-label="Topic / Chapter">Ch. 15 – Translation</td>
+            <td data-label="Assignment / Assessment">Mutation identification assignment</td>
+          </tr>
 
-  <!-- Week 12 -->
-  <tr><td>Mar 30 (Mon)</td><td>Exam 3 – Ch. 6 & 11</td><td></td></tr>
-  <tr><td>Apr 1 (Wed)</td><td>Ch. 12 – DNA Replication</td><td>Achieve assignment (replication)</td></tr>
+          <tr class="pres">
+            <td data-label="Date">Apr 13 (Mon)</td>
+            <td data-label="Topic / Chapter"><b>Student Presentations</b> – Group 1</td>
+            <td data-label="Assignment / Assessment">Presentations (rubric)</td>
+          </tr>
+          <tr class="pres">
+            <td data-label="Date">Apr 15 (Wed)</td>
+            <td data-label="Topic / Chapter"><b>Student Presentations</b> – Group 2</td>
+            <td data-label="Assignment / Assessment">Presentations (rubric)</td>
+          </tr>
+          <tr class="pres">
+            <td data-label="Date">Apr 20 (Mon)</td>
+            <td data-label="Topic / Chapter"><b>Student Presentations</b> – Group 3</td>
+            <td data-label="Assignment / Assessment">Presentations (rubric)</td>
+          </tr>
+          <tr class="pres">
+            <td data-label="Date">Apr 22 (Wed)</td>
+            <td data-label="Topic / Chapter"><b>Student Presentations</b> – Group 4</td>
+            <td data-label="Assignment / Assessment">Presentations (rubric)</td>
+          </tr>
 
-  <!-- Week 13 -->
-  <tr><td>Apr 6 (Mon)</td><td>Ch. 13 – Transcription</td><td>Central dogma quiz</td></tr>
-  <tr><td>Apr 8 (Wed)</td><td>Ch. 15 – Translation</td><td>Mutation identification assignment</td></tr>
+          <tr class="pres">
+            <td data-label="Date">Apr 27 (Mon)</td>
+            <td data-label="Topic / Chapter"><b>Student Presentations</b> – Group 5 + Review</td>
+            <td data-label="Assignment / Assessment">Final review (Ch. 12, 13, 15)</td>
+          </tr>
 
-  <!-- Week 14 -->
-  <tr><td>Apr 13 (Mon)</td><td>Presentations – Group 1</td><td>Presentations</td></tr>
-  <tr><td>Apr 15 (Wed)</td><td>Presentations – Group 2</td><td>Presentations</td></tr>
+          <tr class="exam">
+            <td data-label="Date">Apr 29 (Wed)</td>
+            <td data-label="Topic / Chapter"><b>Final Exam</b> – Ch. 12, 13, 15</td>
+            <td data-label="Assignment / Assessment">Final Exam (not comprehensive)</td>
+          </tr>
 
-  <!-- Week 15 -->
-  <tr><td>Apr 20 (Mon)</td><td>Presentations – Group 3</td><td>Presentations</td></tr>
-  <tr><td>Apr 22 (Wed)</td><td>Presentations – Group 4</td><td>Presentations</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-  <!-- Week 16 -->
-  <tr><td>Apr 27 (Mon)</td><td>Final Exam – Ch. 12, 13, 15</td><td></td></tr>
-
-</table>
-
+    <p class="sub" style="margin-top:14px;">
+      <b>Note:</b> Dates may be adjusted if the university posts a different final exam time. Any changes will be announced in Canvas.
+    </p>
+  </div>
 </body>
 </html>
