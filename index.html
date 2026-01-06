@@ -50,4 +50,285 @@
         background: #fff;
         padding: 20px;
         border-radius: 8px;
-        border: 2px
+        border: 2px solid #90be6d;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* Month Tabs */
+    .month-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .month-tabs button {
+        padding: 8px 15px;
+        border: none;
+        background: #43aa8b;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .month-tabs button.active {
+        background: #007f5f;
+        color: #fff;
+    }
+    .month-tabs button:hover {
+        background: #007f5f;
+        color:#fff;
+    }
+
+    /* Calendar Grid */
+    .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+        text-align: center;
+    }
+
+    .calendar .day-header {
+        font-weight: bold;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+        color: #023047;
+    }
+
+    .calendar .day {
+        background: #f0f9f0;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        min-height: 60px;
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size:14px;
+        position:relative;
+        transition: background 0.3s;
+    }
+
+    .calendar .day.has-event {
+        background: #d0f0c0;
+        border: 1px solid #a3d977;
+    }
+
+    .calendar .day:hover {
+        background: #b5e48c;
+    }
+
+    .calendar .day span {
+        font-size:14px;
+    }
+
+    /* Current day highlight */
+    .calendar .day.current-day {
+        border: 2px solid #d62828;
+        background: #ffe8d6;
+    }
+
+    .details-container {
+        flex: 1;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        border: 2px solid #90be6d;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        overflow-y: auto;
+        max-height: 85vh;
+    }
+
+    .details-container h2 {
+        margin-top: 0;
+        font-size: 20px;
+        color: #023047;
+    }
+
+    .details-container p {
+        margin: 8px 0;
+        color: #023047;
+    }
+
+    .no-details {
+        color: #666;
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+        .container {
+            flex-direction: column;
+        }
+        .calendar-container, .details-container {
+            margin: 0 0 20px 0;
+            max-width: 100%;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="navbar" id="home">
+    <h1>Genetics 336 Course Calendar</h1>
+    <a href="#home">Home</a>
+</div>
+
+<div class="container">
+    <div class="calendar-container">
+        <div class="month-tabs">
+            <button class="month-tab-btn" data-month="january">January</button>
+            <button class="month-tab-btn" data-month="february">February</button>
+            <button class="month-tab-btn" data-month="march">March</button>
+            <button class="month-tab-btn" data-month="april">April</button>
+        </div>
+        <div id="calendar"></div>
+    </div>
+    <div class="details-container">
+        <h2>Details</h2>
+        <div id="details"></div>
+    </div>
+</div>
+
+<script>
+    // Utilities
+    function pad(n) { return n < 10 ? '0' + n : n; }
+
+    // Genetics 336 schedule data (Spring 2026) — Mondays & Wednesdays
+    const scheduleData = {
+      // Week 1
+      "2026-01-12": {
+        week: "Week 1",
+        date: "Jan 12",
+        topic: "Course introduction; What is genetics? Core concepts and terminology",
+        readings: "Ch. 1",
+        assignment: "Achieve: Chapter 1 concept check (as assigned)",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+      "2026-01-14": {
+        week: "Week 1",
+        date: "Jan 14",
+        topic: "Chromosomes, genomes, and cell reproduction overview",
+        readings: "Ch. 2 (intro)",
+        assignment: "In-class guided practice",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+
+      // Week 2
+      "2026-01-19": {
+        week: "Week 2",
+        date: "Jan 19",
+        topic: "No class – Martin Luther King Jr. Day",
+        readings: "",
+        assignment: "",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+      "2026-01-21": {
+        week: "Week 2",
+        date: "Jan 21",
+        topic: "Mitosis and the cell cycle; chromosome behavior",
+        readings: "Ch. 2",
+        assignment: "Practice problems (as assigned)",
+        presentation: "",
+        quiz: "Quiz: mitosis (short)",
+        exam: ""
+      },
+
+      // Week 3
+      "2026-01-26": {
+        week: "Week 3",
+        date: "Jan 26",
+        topic: "Meiosis; sources of genetic variation in meiosis",
+        readings: "Ch. 2",
+        assignment: "Practice problems (as assigned)",
+        presentation: "",
+        quiz: "Quiz: meiosis (short)",
+        exam: ""
+      },
+      "2026-01-28": {
+        week: "Week 3",
+        date: "Jan 28",
+        topic: "Mendelian genetics: segregation, dominance, monohybrid crosses",
+        readings: "Ch. 3",
+        assignment: "Punnett square practice (in class)",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+
+      // Week 4
+      "2026-02-02": {
+        week: "Week 4",
+        date: "Feb 2",
+        topic: "Dihybrid crosses, independent assortment, probability and rules of inheritance",
+        readings: "Ch. 3",
+        assignment: "Assignment: Punnett square & probability analysis",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+      "2026-02-04": {
+        week: "Week 4",
+        date: "Feb 4",
+        topic: "Review: Chapters 1–3 (problem solving + key concepts)",
+        readings: "Ch. 1–3",
+        assignment: "Review set (as assigned)",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+
+      // Week 5
+      "2026-02-09": {
+        week: "Week 5",
+        date: "Feb 9",
+        topic: "Exam 1 (Ch. 1–3)",
+        readings: "Ch. 1–3",
+        assignment: "",
+        presentation: "",
+        quiz: "",
+        exam: "Exam 1"
+      },
+      "2026-02-11": {
+        week: "Week 5",
+        date: "Feb 11",
+        topic: "Sex determination systems; sex chromosomes; sex-linked traits (intro)",
+        readings: "Ch. 4",
+        assignment: "Problem set: sex-linked inheritance (as assigned)",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+
+      // Week 6
+      "2026-02-16": {
+        week: "Week 6",
+        date: "Feb 16",
+        topic: "Sex-linked inheritance; dosage compensation; pedigree-style sex-linked analysis",
+        readings: "Ch. 4",
+        assignment: "Achieve assignment (as assigned)",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+      "2026-02-18": {
+        week: "Week 6",
+        date: "Feb 18",
+        topic: "Extensions of Mendelian genetics: penetrance, expressivity, gene interaction",
+        readings: "Ch. 5",
+        assignment: "Practice problems (as assigned)",
+        presentation: "",
+        quiz: "",
+        exam: ""
+      },
+
+      // Week 7
+      "2026-02-23": {
+        week: "Week 7",
+        date: "Feb 23",
+        topic: "Non-Mendelian patterns: multiple a
